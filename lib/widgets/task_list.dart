@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoey_project/models/tasks.dart';
+import 'package:todoey_project/models/tasks_data.dart';
 import 'package:todoey_project/widgets/task_tile.dart';
 
-class TasksList extends StatefulWidget {
-  final List<Task> tasks;
+class TasksList extends StatelessWidget {
+  const TasksList({super.key});
 
-  const TasksList({super.key, required this.tasks});
+//   // final List<Task> tasks;
 
-  @override
-  State<TasksList> createState() => _TasksListState();
-}
+//   // const TasksList({super.key, required this.tasks});
 
-class _TasksListState extends State<TasksList> {
+//   @override
+//   State<TasksList> createState() => _TasksListState();
+// }
+
+// class _TasksListState extends State<TasksList> {
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +26,49 @@ class _TasksListState extends State<TasksList> {
     //     TaskTile(taskTitle: tasks[2].name, isChecked: tasks[2].isDone,)
     //   ],
     // );
-    return Container(
-      child: ListView.builder(itemBuilder: (context,index){
+    return Consumer<TaskData>( 
+      builder: (BuildContext context, taskData, Widget? child) { 
+        return ListView.builder(itemBuilder: (context,index){
         return TaskTile(
-          isChecked: widget.tasks[index].isDone, 
-          taskTitle: widget.tasks[index].name,
+          // isChecked: widget.tasks[index].isDone, 
+          // taskTitle: widget.tasks[index].name,
+          // checkboxCallback: (checkboxState){
+          //   setState(() {
+          //     widget.tasks[index].toggleDone();
+          //   });
+          // }
+          taskTitle: taskData.ListOfTasks[index].name,
+          isChecked: taskData.ListOfTasks[index].isDone,
           checkboxCallback: (checkboxState){
-            setState(() {
-              widget.tasks[index].toggleDone();
-            });
-          }
+            // setState(() {
+            //   Provider.of<TaskData>(context).ListOfTasks[index].toggleDone();
+            // });
+          },
         );
       },
-      itemCount: widget.tasks.length,
-      ),
+      itemCount: taskData.taskCount,
+      );
+    },
+      // child: ListView.builder(itemBuilder: (context,index){
+      //   return TaskTile(
+      //     // isChecked: widget.tasks[index].isDone, 
+      //     // taskTitle: widget.tasks[index].name,
+      //     // checkboxCallback: (checkboxState){
+      //     //   setState(() {
+      //     //     widget.tasks[index].toggleDone();
+      //     //   });
+      //     // }
+      //     taskTitle: Provider.of<TaskData>(context).ListOfTasks[index].name,
+      //     isChecked: Provider.of<TaskData>(context).ListOfTasks[index].isDone,
+      //     checkboxCallback: (checkboxState){
+      //       // setState(() {
+      //       //   Provider.of<TaskData>(context).ListOfTasks[index].toggleDone();
+      //       // });
+      //     },
+      //   );
+      // },
+      // itemCount: Provider.of<TaskData>(context).ListOfTasks.length,
+      // ),
     );
   }
 }
