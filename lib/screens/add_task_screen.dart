@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_project/models/tasks.dart';
+import 'package:todoey_project/models/tasks_data.dart';
 
 class AddTasksScreen extends StatelessWidget {
-  AddTasksScreen(this.addTaskCallback);
-  final Function(String?) addTaskCallback; 
+  // AddTasksScreen(this.addTaskCallback);
+  // final Function(String?) addTaskCallback; 
 
   String newTaskTitle = "Go to Gym";
 
@@ -24,7 +27,13 @@ class AddTasksScreen extends StatelessWidget {
             newTaskTitle = newText;
           },
         ),
-        ElevatedButton(onPressed: addTaskCallback(newTaskTitle), child: Text("Add"))
+        ElevatedButton(onPressed: (){
+          final task = Task(name: newTaskTitle);
+          Provider.of<TaskData>(context).addTask(newTaskTitle);
+          Navigator.pop(context);
+        }, 
+        child: Text("Add"))
+        //ElevatedButton(onPressed: addTaskCallback(newTaskTitle), child: Text("Add"))
       ],),
     );
   }

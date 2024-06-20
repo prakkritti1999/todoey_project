@@ -37,13 +37,17 @@ class TasksList extends StatelessWidget {
           //     widget.tasks[index].toggleDone();
           //   });
           // }
-          taskTitle: taskData.ListOfTasks[index].name,
-          isChecked: taskData.ListOfTasks[index].isDone,
+          taskTitle: taskData.tasks[index].name,
+          isChecked: taskData.tasks[index].isDone,
           checkboxCallback: (checkboxState){
             // setState(() {
             //   Provider.of<TaskData>(context).ListOfTasks[index].toggleDone();
             // });
+            taskData.updateTask(taskData.tasks[index]);    
           },
+          longPressCallBack: (){
+            taskData.deleteTask(taskData.tasks[index]);
+          }
         );
       },
       itemCount: taskData.taskCount,

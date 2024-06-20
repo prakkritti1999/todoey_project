@@ -28,7 +28,7 @@ class _TasksScreenState extends State<TasksScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: (){
-          showModalBottomSheet(context: context, builder: (context)=>Placeholder());
+          showModalBottomSheet(context: context, builder: (context)=>AddTasksScreen());
         },
         shape: CircleBorder(),
         backgroundColor: Colors.lightBlueAccent,
@@ -59,7 +59,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   fontSize: 50,
                   fontWeight: FontWeight.w700
                 ),),
-                Text('${Provider.of<TaskData>(context).ListOfTasks.length} Tasks', style: TextStyle(color: Colors.white))
+                Text('${Provider.of<TaskData>(context).tasks.length} Tasks', style: TextStyle(color: Colors.white))
               ],
             ),
           ),
